@@ -1,0 +1,23 @@
+---
+- name : playbook_lab12.yml
+  hosts: control_node
+  gather_facts: no
+  become: true
+
+  tasks:
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      password: "{{ 'user' | password_hash('sha512') }}"
+      shell: /bin/bash
+    with_items:
+      - user62 
+      - user63 
+
+  - name: force password change
+    shell:
+      /usr/bin/passwd -e {{ item }}
+    with_items:
+      - user62 
+      - user63

@@ -1,0 +1,14 @@
+---
+- name : playbook39.yml
+  hosts: control_node 
+  become: true
+  tasks:
+  - name: install httpd 
+    yum:
+      name: httpd
+      state: latest 
+
+  - name: copy httpd.conf file
+    template:
+     src: httpd_conf_template.j2 
+     dest: /etc/httpd/conf/httpd.conf

@@ -1,0 +1,9 @@
+---
+- name: temp.yml
+  hosts: control_node 
+  no_log: yes
+  tasks:
+  - debug: 
+     var: ansible_cmdline.LANG
+  - debug: 
+     var: ansible_cmdline['LANG']

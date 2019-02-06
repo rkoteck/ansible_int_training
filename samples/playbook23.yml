@@ -1,0 +1,8 @@
+---
+- name: playbook23.yml
+  hosts: control_node 
+  tasks:
+    - name: copy a file 
+      copy:
+       src: ansible.cfg 
+       dest: /tmp 

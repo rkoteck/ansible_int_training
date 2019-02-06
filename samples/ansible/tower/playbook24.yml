@@ -1,0 +1,5 @@
+---
+
+- hosts: control_node 
+  roles:
+  - role: role1

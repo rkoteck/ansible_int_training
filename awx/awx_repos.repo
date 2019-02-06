@@ -1,0 +1,56 @@
+[awx]
+name=awx packages
+baseurl=https://copr-be.cloud.fedoraproject.org/results/mrmeee/awx/epel-7-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=0
+gpgkey=https://copr-be.cloud.fedoraproject.org/results/mrmeee/awx/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1
+
+[centos-base]
+name=centos packages
+baseurl=http://mirror.centos.org/centos/7/os/x86_64/
+gpgcheck=0
+enabled=1
+
+[centos7-extras]
+name=centos7 extras packages
+baseurl=http://mirror.centos.org/centos/7/extras/x86_64/
+gpgcheck=0
+enabled=1
+
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+[erlang]
+name=rabbitmq_erlang
+baseurl=https://packagecloud.io/rabbitmq/erlang/el/7/$basearch
+repo_gpgcheck=0
+gpgcheck=0
+enabled=1
+
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/rhel/7/x86_64/
+gpgcheck=0
+enabled=1
+
+[pgdg96]
+name=PostgreSQL 9.6 $releasever - $basearch
+baseurl=https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-$releasever-$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-96
+
+[rabbitmq-server]
+name=bintray-rabbitmq-rpm
+baseurl=https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.7.x/el/7/
+gpgcheck=0
+enabled=1

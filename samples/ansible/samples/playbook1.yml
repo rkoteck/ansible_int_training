@@ -1,0 +1,6 @@
+---
+- name : playbook1.yml
+  hosts: control_node 
+  tasks:
+  - debug: 
+      var: ansible_distribution

@@ -1,0 +1,30 @@
+#!/bin/bash 
+#
+# dosols2 for Ansible second lab exercise in module 4
+#
+command=$(grep "^${1}:" <<DATA
+1:ansible -m win_ping windows10
+2:ansible -m win_shell -a 'executable=cmd dir/ad c:\' windows10
+3:ansible -m win_shell -a 'executable=cmd "mkdir c:\\\temp"' windows10
+4:ansible -m win_shell -a 'executable=cmd dir/ad c:\' windows10
+5:ansible -m win_copy -a 'src=ansible.cfg dest=c:\\\temp\' windows10
+6:ansible -m win_shell -a 'dir c:\\\temp' windows10
+7:ansible -m get_url -a 'url=http://www.laineed.com/putty_suite-0.58.msi dest=/home/ansadm' control_node
+8:ansible -m win_copy -a 'src=putty_suite-0.58.msi dest=c:\\\temp\' windows10
+9:ansible -m win_package -a 'path=c:\\\temp\\\putty_suite-0.58.msi state=present' windows10
+10:ansible -m win_package -a 'path=c:\\\temp\\\putty_suite-0.58.msi state=absent' windows10
+11:ansible -m win_shell -a 'executable=cmd "rmdir/s/q c:\\\temp"' windows10
+12:ansible -m win_service -a 'name=naturalauthentication state=started' windows10
+13:ansible -m win_service -a 'name=naturalauthentication' windows10
+14:ansible -m win_service -a 'name=naturalauthentication state=stopped' windows10
+DATA
+)
+if [[ $2 == o ]]
+then
+command="$(echo ${command} | cut -d: -f2-) -o"
+else
+command=$(echo ${command} | cut -d: -f2-)
+fi
+echo -n -e "\n\nCommand: \033[1m${command} \033[0m    \n\nHit <Enter> to execute it:"
+read  xx
+eval $command

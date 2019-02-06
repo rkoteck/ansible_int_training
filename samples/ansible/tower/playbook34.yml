@@ -1,0 +1,15 @@
+---
+- name : playbook34.yml
+  hosts: control_node
+  gather_facts: no
+  tasks:
+  - name: check for package 
+    command: yum list available tree
+    register: status
+    ignore_errors: True
+
+  - shell: wall tree is installed
+    when: status is failed
+
+  - shell: wall tree is not installed
+    when: status is success

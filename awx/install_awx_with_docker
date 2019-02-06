@@ -1,0 +1,19 @@
+#!/bin/bash
+cp /ansible/awx/awx_with_docker.repo /etc/yum.repos.d 
+yum clean all
+yum makecache
+yum -y install device-mapper-persistent-data lvm2 ansible git python-devel python-pip python-docker-py
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum clean all
+yum makecache
+yum -y install docker-ce
+systemctl start  docker
+systemctl enable  docker
+cd /root
+git clone https://github.com/ansible/awx.git
+cd awx
+git clone https://github.com/ansible/awx-logos.git
+cd /root/awx/installer
+cp /ansible/awx/stock .
+cp /ansible/awx/inventory .
+ansible-playbook -i inventory install.yml

@@ -1,0 +1,524 @@
+shell> install_awx_with_docker 
+
+Cleaning repos: centos-base centos7-extras epel http-repo
+Other repos take up 67 M of disk space (use --verbose for details)
+centos-base                                                         | 3.6 kB  00:00:00     
+centos7-extras                                                      | 3.4 kB  00:00:00     
+epel/x86_64/metalink                                                |  19 kB  00:00:00     
+epel                                                                | 4.7 kB  00:00:00     
+http-repo                                                           | 2.9 kB  00:00:00     
+(1/17): centos-base/group_gz                                        | 166 kB  00:00:00     
+(2/17): centos-base/filelists_db                                    | 7.1 MB  00:00:02     
+(3/17): centos-base/other_db                                        | 2.6 MB  00:00:00     
+(4/17): centos7-extras/filelists_db                                 | 189 kB  00:00:01     
+(5/17): centos7-extras/prestodelta                                  |  36 kB  00:00:01     
+(6/17): centos7-extras/primary_db                                   | 156 kB  00:00:00     
+(7/17): epel/x86_64/group_gz                                        |  88 kB  00:00:00     
+(8/17): centos7-extras/other_db                                     | 107 kB  00:00:00     
+(9/17): centos-base/primary_db                                      | 6.0 MB  00:00:05     
+(10/17): epel/x86_64/filelists_db                                   |  11 MB  00:00:02     
+(11/17): epel/x86_64/updateinfo                                     | 950 kB  00:00:00     
+(12/17): epel/x86_64/prestodelta                                    | 1.0 kB  00:00:00     
+(13/17): epel/x86_64/primary_db                                     | 6.6 MB  00:00:01     
+(14/17): http-repo/filelists_db                                     | 3.9 MB  00:00:00     
+(15/17): http-repo/primary_db                                       | 5.0 MB  00:00:00     
+(16/17): http-repo/other_db                                         | 1.6 MB  00:00:00     
+(17/17): epel/x86_64/other_db                                       | 3.2 MB  00:00:01     
+Metadata Cache Created
+Package device-mapper-persistent-data-0.7.3-3.el7.x86_64 already installed and latest version
+Package 7:lvm2-2.02.180-8.el7.x86_64 already installed and latest version
+Package ansible-2.7.5-1.el7.ans.noarch already installed and latest version
+Package git-1.8.3.1-19.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package python-devel.x86_64 0:2.7.5-76.0.1.el7 will be installed
+---> Package python-docker-py.noarch 1:1.10.6-7.el7 will be installed
+--> Processing Dependency: python-websocket-client >= 0.32.0 for package: 1:python-docker-py-1.10.6-7.el7.noarch
+--> Processing Dependency: python-requests for package: 1:python-docker-py-1.10.6-7.el7.noarch
+--> Processing Dependency: python-docker-pycreds for package: 1:python-docker-py-1.10.6-7.el7.noarch
+---> Package python2-pip.noarch 0:8.1.2-6.el7 will be installed
+--> Running transaction check
+---> Package python-docker-pycreds.noarch 1:0.3.0-7.el7 will be installed
+---> Package python-requests.noarch 0:2.6.0-1.el7_1 will be installed
+--> Processing Dependency: python-urllib3 >= 1.10.2-1 for package: python-requests-2.6.0-1.el7_1.noarch
+---> Package python-websocket-client.noarch 0:0.32.0-116.el7 will be installed
+--> Running transaction check
+---> Package python-urllib3.noarch 0:1.10.2-5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===========================================================================================
+ Package                      Arch        Version                Repository           Size
+===========================================================================================
+Installing:
+ python-devel                 x86_64      2.7.5-76.0.1.el7       http-repo           397 k
+ python-docker-py             noarch      1:1.10.6-7.el7         centos7-extras      102 k
+ python2-pip                  noarch      8.1.2-6.el7            epel                1.7 M
+Installing for dependencies:
+ python-docker-pycreds        noarch      1:0.3.0-7.el7          centos7-extras       20 k
+ python-requests              noarch      2.6.0-1.el7_1          centos-base          94 k
+ python-urllib3               noarch      1.10.2-5.el7           centos-base         102 k
+ python-websocket-client      noarch      0.32.0-116.el7         centos7-extras       56 k
+
+Transaction Summary
+===========================================================================================
+Install  3 Packages (+4 Dependent packages)
+
+Total download size: 2.4 M
+Installed size: 9.5 M
+Downloading packages:
+(1/7): python-devel-2.7.5-76.0.1.el7.x86_64.rpm                     | 397 kB  00:00:00     
+(2/7): python-docker-pycreds-0.3.0-7.el7.noarch.rpm                 |  20 kB  00:00:00     
+(3/7): python-requests-2.6.0-1.el7_1.noarch.rpm                     |  94 kB  00:00:00     
+(4/7): python-docker-py-1.10.6-7.el7.noarch.rpm                     | 102 kB  00:00:00     
+(5/7): python-websocket-client-0.32.0-116.el7.noarch.rpm            |  56 kB  00:00:00     
+(6/7): python-urllib3-1.10.2-5.el7.noarch.rpm                       | 102 kB  00:00:00     
+(7/7): python2-pip-8.1.2-6.el7.noarch.rpm                           | 1.7 MB  00:00:00     
+-------------------------------------------------------------------------------------------
+Total                                                      1.6 MB/s | 2.4 MB  00:00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : python-urllib3-1.10.2-5.el7.noarch                                      1/7 
+  Installing : python-requests-2.6.0-1.el7_1.noarch                                    2/7 
+  Installing : python-websocket-client-0.32.0-116.el7.noarch                           3/7 
+  Installing : 1:python-docker-pycreds-0.3.0-7.el7.noarch                              4/7 
+  Installing : 1:python-docker-py-1.10.6-7.el7.noarch                                  5/7 
+  Installing : python-devel-2.7.5-76.0.1.el7.x86_64                                    6/7 
+  Installing : python2-pip-8.1.2-6.el7.noarch                                          7/7 
+  Verifying  : 1:python-docker-pycreds-0.3.0-7.el7.noarch                              1/7 
+  Verifying  : python-requests-2.6.0-1.el7_1.noarch                                    2/7 
+  Verifying  : python2-pip-8.1.2-6.el7.noarch                                          3/7 
+  Verifying  : python-websocket-client-0.32.0-116.el7.noarch                           4/7 
+  Verifying  : python-urllib3-1.10.2-5.el7.noarch                                      5/7 
+  Verifying  : 1:python-docker-py-1.10.6-7.el7.noarch                                  6/7 
+  Verifying  : python-devel-2.7.5-76.0.1.el7.x86_64                                    7/7 
+
+Installed:
+  python-devel.x86_64 0:2.7.5-76.0.1.el7       python-docker-py.noarch 1:1.10.6-7.el7      
+  python2-pip.noarch 0:8.1.2-6.el7            
+
+Dependency Installed:
+  python-docker-pycreds.noarch 1:0.3.0-7.el7                                               
+  python-requests.noarch 0:2.6.0-1.el7_1                                                   
+  python-urllib3.noarch 0:1.10.2-5.el7                                                     
+  python-websocket-client.noarch 0:0.32.0-116.el7                                          
+
+Complete!
+adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
+grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
+repo saved to /etc/yum.repos.d/docker-ce.repo
+Cleaning repos: centos-base centos7-extras docker-ce-stable epel http-repo
+Other repos take up 67 M of disk space (use --verbose for details)
+centos-base                                                         | 3.6 kB  00:00:00     
+centos7-extras                                                      | 3.4 kB  00:00:00     
+docker-ce-stable                                                    | 3.5 kB  00:00:00     
+epel/x86_64/metalink                                                |  19 kB  00:00:00     
+epel                                                                | 4.7 kB  00:00:00     
+http-repo                                                           | 2.9 kB  00:00:00     
+(1/21): centos-base/group_gz                                        | 166 kB  00:00:00     
+(2/21): centos-base/primary_db                                      | 6.0 MB  00:00:02     
+(3/21): centos7-extras/prestodelta                                  |  36 kB  00:00:00     
+(4/21): centos7-extras/filelists_db                                 | 189 kB  00:00:00     
+(5/21): centos7-extras/primary_db                                   | 156 kB  00:00:00     
+(6/21): centos7-extras/other_db                                     | 107 kB  00:00:00     
+(7/21): docker-ce-stable/x86_64/filelists_db                        |  11 kB  00:00:00     
+(8/21): docker-ce-stable/x86_64/primary_db                          |  20 kB  00:00:00     
+(9/21): docker-ce-stable/x86_64/other_db                            | 108 kB  00:00:00     
+(10/21): docker-ce-stable/x86_64/updateinfo                         |   55 B  00:00:00     
+(11/21): epel/x86_64/group_gz                                       |  88 kB  00:00:00     
+(12/21): centos-base/other_db                                       | 2.6 MB  00:00:01     
+(13/21): centos-base/filelists_db                                   | 7.1 MB  00:00:03     
+(14/21): epel/x86_64/filelists_db                                   |  11 MB  00:00:03     
+(15/21): epel/x86_64/updateinfo                                     | 950 kB  00:00:00     
+(16/21): epel/x86_64/prestodelta                                    | 1.0 kB  00:00:00     
+(17/21): epel/x86_64/primary_db                                     | 6.6 MB  00:00:02     
+(18/21): http-repo/filelists_db                                     | 3.9 MB  00:00:00     
+(19/21): http-repo/other_db                                         | 1.6 MB  00:00:00     
+(20/21): http-repo/primary_db                                       | 5.0 MB  00:00:00     
+(21/21): epel/x86_64/other_db                                       | 3.2 MB  00:00:01     
+Metadata Cache Created
+Resolving Dependencies
+--> Running transaction check
+---> Package docker-ce.x86_64 3:18.09.1-3.el7 will be installed
+--> Processing Dependency: container-selinux >= 2.9 for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Processing Dependency: containerd.io for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Processing Dependency: docker-ce-cli for package: 3:docker-ce-18.09.1-3.el7.x86_64
+--> Running transaction check
+---> Package container-selinux.noarch 2:2.74-1.el7 will be installed
+---> Package containerd.io.x86_64 0:1.2.2-3.el7 will be installed
+---> Package docker-ce-cli.x86_64 1:18.09.1-3.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===========================================================================================
+ Package                 Arch         Version                 Repository              Size
+===========================================================================================
+Installing:
+ docker-ce               x86_64       3:18.09.1-3.el7         docker-ce-stable        19 M
+Installing for dependencies:
+ container-selinux       noarch       2:2.74-1.el7            centos7-extras          38 k
+ containerd.io           x86_64       1.2.2-3.el7             docker-ce-stable        22 M
+ docker-ce-cli           x86_64       1:18.09.1-3.el7         docker-ce-stable        14 M
+
+Transaction Summary
+===========================================================================================
+Install  1 Package (+3 Dependent packages)
+
+Total download size: 55 M
+Installed size: 235 M
+Downloading packages:
+(1/4): container-selinux-2.74-1.el7.noarch.rpm                      |  38 kB  00:00:00     
+warning: /var/cache/yum/x86_64/7Server/docker-ce-stable/packages/containerd.io-1.2.2-3.el7.x86_64.rpm: Header V4 RSA/SHA512 Signature, key ID 621e9f35: NOKEY
+Public key for containerd.io-1.2.2-3.el7.x86_64.rpm is not installed
+(2/4): containerd.io-1.2.2-3.el7.x86_64.rpm                         |  22 MB  00:00:10     
+(3/4): docker-ce-18.09.1-3.el7.x86_64.rpm                           |  19 MB  00:00:10     
+(4/4): docker-ce-cli-18.09.1-3.el7.x86_64.rpm                       |  14 MB  00:00:03     
+-------------------------------------------------------------------------------------------
+Total                                                      3.8 MB/s |  55 MB  00:00:14     
+Retrieving key from https://download.docker.com/linux/centos/gpg
+Importing GPG key 0x621E9F35:
+ Userid     : "Docker Release (CE rpm) <docker@docker.com>"
+ Fingerprint: 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35
+ From       : https://download.docker.com/linux/centos/gpg
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : containerd.io-1.2.2-3.el7.x86_64                                        1/4 
+  Installing : 1:docker-ce-cli-18.09.1-3.el7.x86_64                                    2/4 
+  Installing : 2:container-selinux-2.74-1.el7.noarch                                   3/4 
+  Installing : 3:docker-ce-18.09.1-3.el7.x86_64                                        4/4 
+  Verifying  : 2:container-selinux-2.74-1.el7.noarch                                   1/4 
+  Verifying  : 1:docker-ce-cli-18.09.1-3.el7.x86_64                                    2/4 
+  Verifying  : 3:docker-ce-18.09.1-3.el7.x86_64                                        3/4 
+  Verifying  : containerd.io-1.2.2-3.el7.x86_64                                        4/4 
+
+Installed:
+  docker-ce.x86_64 3:18.09.1-3.el7                                                         
+
+Dependency Installed:
+  container-selinux.noarch 2:2.74-1.el7         containerd.io.x86_64 0:1.2.2-3.el7        
+  docker-ce-cli.x86_64 1:18.09.1-3.el7         
+
+Complete!
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+Cloning into 'awx'...
+remote: Enumerating objects: 35, done.
+remote: Counting objects: 100% (35/35), done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 186706 (delta 12), reused 16 (delta 6), pack-reused 186671
+Receiving objects: 100% (186706/186706), 205.75 MiB | 3.57 MiB/s, done.
+Resolving deltas: 100% (144803/144803), done.
+Cloning into 'awx-logos'...
+remote: Enumerating objects: 59, done.
+remote: Total 59 (delta 0), reused 0 (delta 0), pack-reused 59
+Unpacking objects: 100% (59/59), done.
+
+PLAY [Build and deploy AWX] ***************************************************************
+
+TASK [check_vars : include_tasks] *********************************************************
+skipping: [localhost]
+
+TASK [check_vars : include_tasks] *********************************************************
+included: /root/awx/installer/roles/check_vars/tasks/check_docker.yml for localhost
+
+TASK [check_vars : postgres_data_dir should be defined] ***********************************
+ok: [localhost] => {
+    "changed": false, 
+    "msg": "All assertions passed"
+}
+
+TASK [check_vars : host_port should be defined] *******************************************
+ok: [localhost] => {
+    "changed": false, 
+    "msg": "All assertions passed"
+}
+
+TASK [image_build : Set global version if not provided] ***********************************
+skipping: [localhost]
+
+TASK [image_build : Verify awx-logos directory exists for official install] ***************
+skipping: [localhost]
+
+TASK [image_build : Copy logos for inclusion in sdist] ************************************
+skipping: [localhost]
+
+TASK [image_build : Set sdist file name] **************************************************
+skipping: [localhost]
+
+TASK [image_build : AWX Distribution] *****************************************************
+skipping: [localhost]
+
+TASK [image_build : Stat distribution file] ***********************************************
+skipping: [localhost]
+
+TASK [image_build : Clean distribution] ***************************************************
+skipping: [localhost]
+
+TASK [image_build : Build sdist builder image] ********************************************
+skipping: [localhost]
+
+TASK [image_build : Build AWX distribution using container] *******************************
+skipping: [localhost]
+
+TASK [image_build : Build AWX distribution locally] ***************************************
+skipping: [localhost]
+
+TASK [image_build : Set docker build base path] *******************************************
+skipping: [localhost]
+
+TASK [image_build : Set awx_web image name] ***********************************************
+skipping: [localhost]
+
+TASK [image_build : Set awx_task image name] **********************************************
+skipping: [localhost]
+
+TASK [image_build : Ensure directory exists] **********************************************
+skipping: [localhost]
+
+TASK [image_build : Stage sdist] **********************************************************
+skipping: [localhost]
+
+TASK [image_build : Template web Dockerfile] **********************************************
+skipping: [localhost]
+
+TASK [image_build : Template task Dockerfile] *********************************************
+skipping: [localhost]
+
+TASK [image_build : Stage launch_awx] *****************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage launch_awx_task] ************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage nginx.conf] *****************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage supervisor.conf] ************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage supervisor_task.conf] *******************************************
+skipping: [localhost]
+
+TASK [image_build : Stage settings.py] ****************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage requirements] ***************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage config watcher] *************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage Makefile] *******************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage ansible repo] ***************************************************
+skipping: [localhost]
+
+TASK [image_build : Stage ansible repo key] ***********************************************
+skipping: [localhost]
+
+TASK [image_build : Build base web image] *************************************************
+skipping: [localhost]
+
+TASK [image_build : Build base task image] ************************************************
+skipping: [localhost]
+
+TASK [image_build : Tag task and web images as latest] ************************************
+skipping: [localhost]
+
+TASK [image_build : Clean docker base directory] ******************************************
+skipping: [localhost]
+
+TASK [image_push : Authenticate with Docker registry if registry password given] **********
+skipping: [localhost]
+
+TASK [image_push : Remove web image] ******************************************************
+skipping: [localhost]
+
+TASK [image_push : Remove task image] *****************************************************
+skipping: [localhost]
+
+TASK [image_push : Tag and push web image to registry] ************************************
+skipping: [localhost]
+
+TASK [image_push : Tag and push task image to registry] ***********************************
+skipping: [localhost]
+
+TASK [image_push : Set full image path for Registry] **************************************
+skipping: [localhost]
+
+TASK [kubernetes : fail] ******************************************************************
+skipping: [localhost]
+
+TASK [kubernetes : include_tasks] *********************************************************
+skipping: [localhost] => (item=openshift_auth.yml) 
+skipping: [localhost] => (item=openshift.yml) 
+
+TASK [kubernetes : include_tasks] *********************************************************
+skipping: [localhost] => (item=kubernetes_auth.yml) 
+skipping: [localhost] => (item=kubernetes.yml) 
+
+TASK [kubernetes : Use kubectl or oc] *****************************************************
+skipping: [localhost]
+
+TASK [kubernetes : set_fact] **************************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Record deployment size] ************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Set expected post-deployment Replicas value] ***************************
+skipping: [localhost]
+
+TASK [kubernetes : Delete existing Deployment] ********************************************
+skipping: [localhost]
+
+TASK [kubernetes : Get Postgres Service Detail] *******************************************
+skipping: [localhost]
+
+TASK [kubernetes : Template PostgreSQL Deployment (OpenShift)] ****************************
+skipping: [localhost]
+
+TASK [kubernetes : Deploy and Activate Postgres (OpenShift)] ******************************
+skipping: [localhost]
+
+TASK [kubernetes : Deploy and Activate Postgres (Kubernetes)] *****************************
+skipping: [localhost]
+
+TASK [kubernetes : Set postgresql hostname to helm package service (Kubernetes)] **********
+skipping: [localhost]
+
+TASK [kubernetes : Wait for Postgres to activate] *****************************************
+skipping: [localhost]
+
+TASK [kubernetes : Set task image name] ***************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Set web image name] ****************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Render deployment templates] *******************************************
+skipping: [localhost] => (item=None) 
+skipping: [localhost] => (item=None) 
+skipping: [localhost] => (item=None) 
+skipping: [localhost]
+
+TASK [kubernetes : Apply Deployment] ******************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Delete any existing management pod] ************************************
+skipping: [localhost]
+
+TASK [kubernetes : Template management pod] ***********************************************
+skipping: [localhost]
+
+TASK [kubernetes : Create management pod] *************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Wait for management pod to start] **************************************
+skipping: [localhost]
+
+TASK [kubernetes : Migrate database] ******************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Check for Tower Super users] *******************************************
+skipping: [localhost]
+
+TASK [kubernetes : create django super user if it does not exist] *************************
+skipping: [localhost]
+
+TASK [kubernetes : update django super user password] *************************************
+skipping: [localhost]
+
+TASK [kubernetes : Create the default organization if it is needed.] **********************
+skipping: [localhost]
+
+TASK [kubernetes : Delete management pod] *************************************************
+skipping: [localhost]
+
+TASK [kubernetes : Scale up deployment] ***************************************************
+skipping: [localhost]
+
+TASK [local_docker : Export Docker web image if it isnt local and there isnt a registry defined] ***
+skipping: [localhost]
+
+TASK [local_docker : Export Docker task image if it isnt local and there isnt a registry defined] ***
+skipping: [localhost]
+
+TASK [local_docker : Set docker base path] ************************************************
+skipping: [localhost]
+
+TASK [local_docker : Ensure directory exists] *********************************************
+skipping: [localhost]
+
+TASK [local_docker : Copy web image to docker execution] **********************************
+skipping: [localhost]
+
+TASK [local_docker : Copy task image to docker execution] *********************************
+skipping: [localhost]
+
+TASK [local_docker : Load web image] ******************************************************
+skipping: [localhost]
+
+TASK [local_docker : Load task image] *****************************************************
+skipping: [localhost]
+
+TASK [local_docker : Set full image path for local install] *******************************
+skipping: [localhost]
+
+TASK [local_docker : Set DockerHub Image Paths] *******************************************
+ok: [localhost]
+
+TASK [local_docker : Activate postgres container] *****************************************
+changed: [localhost]
+
+TASK [local_docker : Activate rabbitmq container] *****************************************
+changed: [localhost]
+
+TASK [local_docker : Activate memcached container] ****************************************
+changed: [localhost]
+
+TASK [local_docker : Wait for postgres and rabbitmq to activate] **************************
+Pausing for 15 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [localhost]
+
+TASK [local_docker : Set properties without postgres for awx_web] *************************
+skipping: [localhost]
+
+TASK [local_docker : Set properties with postgres for awx_web] ****************************
+ok: [localhost]
+
+TASK [local_docker : Set properties without postgres for awx_task] ************************
+skipping: [localhost]
+
+TASK [local_docker : Set properties with postgres for awx_task] ***************************
+ok: [localhost]
+
+TASK [local_docker : Activate AWX Web Container] ******************************************
+changed: [localhost]
+
+TASK [local_docker : Update CA trust in awx_web container] ********************************
+changed: [localhost]
+
+TASK [local_docker : Activate AWX Task Container] *****************************************
+changed: [localhost]
+
+TASK [local_docker : Create /var/lib/awx directory] ***************************************
+skipping: [localhost]
+
+TASK [local_docker : Create docker-compose.yml file] **************************************
+skipping: [localhost]
+
+TASK [local_docker : Start the containers] ************************************************
+skipping: [localhost]
+
+PLAY RECAP ********************************************************************************
+localhost                  : ok=13   changed=6    unreachable=0    failed=0   
+
+shell> 

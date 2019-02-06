@@ -1,0 +1,25 @@
+---
+- name : var_check.yml example of checking for variable existence
+  hosts: control_node 
+  gather_facts: no
+  become: true
+  tasks:
+
+  - name: see if user_list is defined
+    set_fact:
+      list: "{{user_list}}"
+    when: user_list is defined
+
+  - name: see if user_list is not defined
+    fail:
+      msg: "variable - user_list - is not defined....failing"
+    when: user_list is not defined
+
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      shell: /bin/bash
+    with_items: 
+    - "{{ list }}" 
+    check_mode: yes

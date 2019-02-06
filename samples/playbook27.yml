@@ -1,0 +1,8 @@
+     1	---
+     2	- name : playbook27.yml
+     3	  hosts: control_node 
+     4	  vars:
+     5	    var1: "{{ lookup('file','/home/ansadm/.ssh/id_rsa.pub') }}"
+     6	  tasks:
+     7	  - debug: 
+     8	     var: var1

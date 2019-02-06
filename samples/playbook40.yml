@@ -1,0 +1,10 @@
+---
+- name: playbook40.yml
+  hosts: managed_node,control_node
+  tasks:
+  - stat: 
+       path: /usr/bin/ansible
+    register: status
+  - debug: 
+      msg: "{{ansible_hostname}} is a control node" 
+    when: status.stat.exists == true

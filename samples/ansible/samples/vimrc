@@ -1,0 +1,17 @@
+set number
+set nowrapscan
+set noignorecase
+set report=1
+set history=30
+
+set mouse=a
+set ruler
+set scrolloff=10
+set undolevels=500
+
+map <home> 1G
+map <end> G
+map <backspace> X
+
+syntax off
+colorscheme default

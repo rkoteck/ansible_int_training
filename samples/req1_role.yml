@@ -1,0 +1,3 @@
+- name: role1
+  src: /home/user60/role1.tar.gz
+# src: /home/ansadm/role1.tar.gz

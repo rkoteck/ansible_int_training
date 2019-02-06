@@ -1,0 +1,23 @@
+---
+- name : playbook_lab10.yml
+  hosts: managed_node,control_node 
+  gather_facts: yes 
+  become: true
+
+  tasks:
+  - name: define variable needed by template
+    set_fact: 
+      ip_address: 
+          "{{ansible_all_ipv4_addresses[0].encode('ascii')}}"
+    when:  ansible_hostname == "control_node"
+
+  - name: setup repo descriptor file
+    block:
+    - template:
+          src: package_repo.j2 
+          dest: /etc/yum.repos.d/package.repo
+
+    - command: /bin/yum clean all
+
+    - command: /bin/yum makecache
+    when: ansible_distribution == "CentOS" 

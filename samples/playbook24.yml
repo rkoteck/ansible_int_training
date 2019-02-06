@@ -1,0 +1,6 @@
+---
+
+- name: playbook24.yml 
+  hosts: control_node 
+  roles:
+  - role: role1

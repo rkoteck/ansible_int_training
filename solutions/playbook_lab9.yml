@@ -1,0 +1,49 @@
+---
+- name : playbook_lab9.yml
+  hosts: localhost 
+  become: true
+  vars:
+    access: granted
+    portno: 8090
+  tasks:
+  - name: install httpd package
+    yum: 
+      name: httpd
+      state: present
+
+  - name: create repository symbolic link 
+    file:  
+      path: /var/www/html/repository
+      src: /repository
+      state: link
+
+  - name: copy httpd.conf file
+    template:
+      src: httpd_conf_template.j2 
+      dest: /etc/httpd/conf/httpd.conf
+
+  - name: enable and start httpd service
+    service:
+      name: httpd
+      enabled: yes
+      state: started
+
+  - name: copy repo descriptor file
+    copy:
+      src: /ansible/solutions/http.repo
+      dest: /etc/yum.repos.d
+
+  - name: modify local.repo file
+    lineinfile:
+      path: /etc/yum.repos.d/local.repo
+      regexp: '^enabled=1'
+      line: "enabled=0"  
+      backrefs: yes
+
+  - name: clean local yum caches
+    command: 
+      /bin/yum clean all
+
+  - name: reset local yum caches
+    command: 
+      /bin/yum makecache

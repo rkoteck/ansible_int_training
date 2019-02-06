@@ -1,0 +1,7 @@
+---
+- name: playbook_lab1.yml
+  hosts: control_node 
+  gather_facts: yes
+  tasks:
+  - debug:
+      var: ansible_distribution

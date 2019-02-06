@@ -1,0 +1,7 @@
+---
+- name : playbook11.yml
+  hosts: control_node 
+  tasks:
+  - shell: echo "value is {{ var2 }}" 
+    register: output
+  - debug: var=output.stdout_lines

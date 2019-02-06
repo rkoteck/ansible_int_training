@@ -1,0 +1,11 @@
+{
+    "company_name": "laine educational", 
+    "contact_email": "pjlovecchio@gmail.com", 
+    "contact_name": "phil lovecchio", 
+    "hostname": "b1e7c7d303bb4ce3a54246c03c54fd84", 
+    "instance_count": 10, 
+    "license_date": 2139827002, 
+    "license_key": "40c658186855dcc02ebcec489b1a6fba69a2a1fbb199793a902569bbd96836af", 
+    "license_type": "basic", 
+    "subscription_name": "Red Hat Ansible Tower, Self-Support (10 Managed Nodes)"
+}

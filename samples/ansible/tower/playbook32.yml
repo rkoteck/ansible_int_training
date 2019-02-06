@@ -1,0 +1,8 @@
+---
+- name : playbook32.yml
+  hosts: control_node 
+  tasks:
+  - debug: 
+      var: ansible_cmdline.LANG
+  - debug: 
+      var: ansible_cmdline['LANG']

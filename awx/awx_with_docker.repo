@@ -1,0 +1,19 @@
+[centos-base]
+name=centos packages
+baseurl=http://mirror.centos.org/centos/7/os/x86_64/
+gpgcheck=0
+enabled=1
+
+[centos7-extras]
+name=centos7 extras packages
+baseurl=http://mirror.centos.org/centos/7/extras/x86_64/
+gpgcheck=0
+enabled=1
+
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7

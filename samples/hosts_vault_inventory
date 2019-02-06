@@ -1,0 +1,29 @@
+# ============ actual entries ============================
+#
+---
+all:
+ hosts:
+  localhost:
+      ansible_connection: local
+  control_node:
+  control_node.localdomain:
+  managed_node:
+
+win:
+ hosts:
+  windows10:
+  win10ent:
+
+ vars:
+  ansible_user: wasadmin
+  ansible_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36336564646538373762353738353430653330306438623837616132663331323963313761396132
+          6636653638616135313832383238316232366562653137360a313633613565393932666365666138
+          39353161633036623535346539313038346430643530336336653932306362373534616537353533
+          3233306564396635370a636163333665313033626333333332646264376563623036393737386333
+          3633
+  ansible_port: 5986
+  ansible_connection: winrm
+  ansible_winrm_server_cert_validation: ignore
+

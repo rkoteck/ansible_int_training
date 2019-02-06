@@ -1,0 +1,15 @@
+---
+- name : playbook17.yml
+  hosts: control_node
+  gather_facts: no
+  become: true
+  vars_files: 
+  - usernames.yml
+
+  tasks:
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      shell: /bin/bash
+    with_items: "{{user_list}}"

@@ -1,0 +1,21 @@
+---
+- name : playbook_lab5.yml
+  hosts: control_node 
+  become: true
+  tasks:
+  - name: install vsftpd 
+    yum:
+      name: vsftpd
+      state: latest 
+
+  - name: change ftpusers file
+    lineinfile:
+     path: /etc/vsftpd/ftpusers
+     regexp: '^root'
+     line: "#root"
+
+  - name: change user_list file
+    lineinfile:
+     path: /etc/vsftpd/user_list
+     regexp: '^root'
+     line: "#root"

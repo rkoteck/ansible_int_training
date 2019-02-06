@@ -1,0 +1,6 @@
+---
+- name: test httpd repo setup playbook role
+  become: true
+  hosts: control_node 
+  roles:
+  - role: httpd_repo_setup_role 

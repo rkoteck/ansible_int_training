@@ -1,0 +1,10 @@
+---
+- name: playbook26.yml
+  hosts: control_node 
+  gather_facts: False
+  tasks:
+    - name: copy a file 
+      tags: print_action
+      copy:
+        src: .bashrc 
+        dest: /tmp/bashrc

@@ -1,0 +1,29 @@
+---
+- name : playbook_lab11.yml
+  hosts: control_node
+  gather_facts: no
+  become: true
+
+  tasks:
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      shell: /bin/bash
+    with_items:
+      - user62 
+      - user63 
+
+  - name: set password
+    shell:
+      /usr/bin/echo "user" | /usr/bin/passwd {{ item }} --stdin
+    with_items:
+      - user62 
+      - user63 
+
+  - name: force password change
+    shell:
+      /usr/bin/passwd -e {{ item }}
+    with_items:
+      - user62 
+      - user63

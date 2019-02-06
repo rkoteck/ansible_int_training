@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+#
+if [[ $1 == "" ]];then echo "Usage: edit file-to-edit";exit;fi
+gedit $1 2>/dev/null

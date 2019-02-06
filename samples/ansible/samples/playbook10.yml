@@ -1,0 +1,6 @@
+---
+- name: playbook10.yml
+  hosts: all 
+  tasks:
+    - debug:
+        var: hostvars.{{ansible_hostname}}.ansible_hostname

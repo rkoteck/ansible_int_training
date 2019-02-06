@@ -1,0 +1,11 @@
+---
+- name : playbook13.yml
+  hosts: control_node,managed_node 
+  gather_facts: False
+  become: true
+
+  tasks:
+  - name: install tree 
+    yum:
+      name: tree 
+      state: present 

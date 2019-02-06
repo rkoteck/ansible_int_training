@@ -1,0 +1,21 @@
+---
+- name : playbook35.yml
+  hosts: control_node
+  gather_facts: no
+
+  tasks:
+  - name: check for package 
+    command: yum list available tree
+    register: status
+    ignore_errors: True
+
+  - set_fact: 
+      output: "tree is installed"
+    when: status is failed
+
+  - set_fact: 
+      output: "tree is not installed"
+    when: status is success
+
+  - debug:
+      var: output

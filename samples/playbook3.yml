@@ -1,0 +1,13 @@
+---
+- name : playbook3.yml
+  hosts: control_node
+  gather_facts: yes
+  tasks:
+   - shell: echo "on Oracle Linux"
+     register: output 
+
+   - debug:
+       var: output.stdout
+   - debug:
+       msg: "{{output.stdout}}"
+     when:  ansible_distribution  == "OracleLinux"

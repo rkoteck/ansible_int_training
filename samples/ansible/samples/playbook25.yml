@@ -1,0 +1,9 @@
+---
+- name: playbook25.yml
+  hosts: control_node 
+  gather_facts: False
+  tasks:
+    - name: copy a file 
+      copy:
+       src: nosuchfile 
+       dest: /tmp 

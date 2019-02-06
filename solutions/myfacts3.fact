@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+#
+# myfacts3.sh
+x='{
+"our_class" : {"class_name": "Ansible",
+ "instructor": "Phil LoVecchio"
+              }
+}'
+echo "$x"

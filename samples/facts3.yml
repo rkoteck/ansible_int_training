@@ -1,0 +1,24 @@
+---
+- name : facts3.yml  shows usage of ansible_local 
+  hosts: control_node,managed_node
+  become: true
+  gather_facts: yes
+
+  tasks:
+  - name: combined local facts modules usage
+    block:
+     - name: create directory for ansible custom facts
+       file: state=directory recurse=yes 
+               path=/etc/ansible/facts.d
+     - name: install custom facts file
+       copy: src=managed_node.fact 
+               dest=/etc/ansible/facts.d mode=0755
+     - name: re-read facts after adding custom facts file
+       setup:
+     - name: output ansible_local variables
+       debug:
+         var: 
+           ansible_local.{{ansible_hostname}}.our_class.uptime
+     - name: remove directory for ansible custom facts
+       file: state=absent path=/etc/ansible
+    when: ansible_hostname == "managed_node"

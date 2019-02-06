@@ -1,0 +1,15 @@
+---
+- name : facts1.yml  shows vars and set_fact usage 
+  hosts: control_node,managed_node
+  gather_facts: yes
+  vars:
+     var1: "some piece of info for {{ansible_hostname}}" 
+
+  tasks:
+  - debug:
+     var: var1
+
+  - set_fact:
+       var3: "some other piece of info for {{ansible_hostname}}"
+  - debug:
+       var: hostvars.{{ansible_hostname}}.var3

@@ -1,0 +1,11 @@
+---
+- name : playbook37.yml
+  hosts: control_node 
+  gather_facts: no
+      
+  tasks:
+  - copy: 
+      src: "{{ item }}"
+      dest: /tmp3
+    with_fileglob:
+    - "playbook??.yml"

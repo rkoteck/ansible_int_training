@@ -1,0 +1,10 @@
+---
+- name : playbook28.yml
+  hosts: control_node 
+  vars:
+    var1: "{{ lookup('pipe','head -4 /proc/meminfo') }}"
+  
+  tasks:
+  - copy: 
+      dest: /tmp/meminfo.txt
+      content: "{{ var1 }}\n"

@@ -1,0 +1,12 @@
+---
+
+- name: playbook_lab7.yml 
+  hosts: control_node 
+
+  tasks:
+  - name: first test of simple custom module
+    custom_module:
+    register: result
+
+  - debug:
+      var: result

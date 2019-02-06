@@ -1,0 +1,21 @@
+postgres_data_dir=/var/lib/pgdocker
+awx_official=true
+project_data_dir=/var/lib/awx/projects
+localhost ansible_connection=local
+ansible_python_interpreter="/usr/bin/env python"
+ 
+[all:vars]
+dockerhub_base=ansible
+dockerhub_version=latest
+rabbitmq_version=3.6.14
+awx_secret_key=awxsecret
+postgres_data_dir=/var/lib/pgdocker
+docker_compose_dir=/var/lib/awx
+host_port=80
+docker_compose_dir=/var/lib/awx
+pg_username=awx
+pg_password=awxpass
+pg_database=awx
+awx_official=true
+pg_port=5432
+project_data_dir=/var/lib/awx/projects

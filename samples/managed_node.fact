@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+#
+# managed_node.fact
+#
+cat <<DATA
+{"our_class": {"uptime": "$(uptime)" }
+}
+DATA

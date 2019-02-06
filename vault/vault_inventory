@@ -1,0 +1,52 @@
+shell> # create ansible-vault id/password
+#
+shell> echo "av-password" > $HOME/vault-password
+#
+# encrypt desired password
+#
+shell> ansible-vault encrypt_string --vault-id ansadm@~/vault-password 'password-to-hash' --name ansible_password
+ansible_password: !vault |
+          $ANSIBLE_VAULT;1.2;AES256;ansadm
+          65656434323036333966326439306466646438376538323265623938356237366563386334613735
+          6365353065383931613163356336343232373636343032660a323562633066323238623631623761
+          30616438386234663664663366393061393430326533646662643635616434373139363933333432
+          3530613131646639650a623332663634663761366337653163393038633836656532366531346266
+          31356332653437623866633737333365313830396235363364613163633663383165
+Encryption successful
+#
+# inventory file must be in YAML format to use vault password
+#
+# sample inventory file
+
+all:
+  localhost:
+     ansible_connection: local
+  control_node
+  control_node.localdomain
+
+win:
+  windows10
+
+win:
+  vars:
+    ansible_user: wasadmin
+    ansible_password: !vault |
+          $ANSIBLE_VAULT;1.2;AES256;ansadm
+          65656434323036333966326439306466646438376538323265623938356237366563386334613735
+          6365353065383931613163356336343232373636343032660a323562633066323238623631623761
+          30616438386234663664663366393061393430326533646662643635616434373139363933333432
+          3530613131646639650a623332663634663761366337653163393038633836656532366531346266
+          31356332653437623866633737333365313830396235363364613163633663383165
+    ansible_port: 5986
+    ansible_port: 5986
+    ansible_connection: winrm
+    ansible_winrm_server_cert_validation: ignore
+
+#
+# usage of vault password in inventory file
+#
+shell> ansible-playbook -i inventory-file --vault-id ansadm@~/vault-password playbook-file.yml 
+	.
+	.
+	.
+shell>

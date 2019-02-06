@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# tower-ports
+#
+# shows LISTENer ports for Ansible Tower components
+#
+printf "%-12s %10s   %-16s %s\n" "daemon" "pid" "port" "status"
+
+for x in 443 80 4369 8050 8051 5432 
+
+  do
+
+   lsof -i:$x -P | grep LISTEN |
+                   awk '{printf("%-12s %10d   %-16s %s\n",
+                                 $1,$2,$9,$10)}'
+  done

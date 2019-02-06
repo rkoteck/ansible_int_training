@@ -1,0 +1,14 @@
+---
+- name : playbook18.yml
+  hosts: control_node 
+  gather_facts: no
+  become: true
+
+  tasks:
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      shell: /bin/bash
+    with_lines: 
+    - /usr/bin/cat usernames.txt 

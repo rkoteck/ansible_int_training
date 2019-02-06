@@ -1,0 +1,15 @@
+---
+- name: playbook_lab19.yml
+  hosts: managed_node,control_node
+  vars:
+    controlnode: false
+  tasks:
+  - stat: 
+       path: /usr/bin/ansible
+    register: status
+  - set_fact: 
+      controlnode: true 
+    when: status.stat.exists == true
+  - debug: 
+      msg: "{{ansible_hostname}} is a control node" 
+    when: controlnode 

@@ -1,0 +1,16 @@
+---
+- name : playbook19.yml
+  hosts: control_node 
+  gather_facts: no
+  become: true
+  vars:
+   list: "{{ user_list | default(['user62','user63']) }}" 
+
+  tasks:
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      shell: /bin/bash
+    with_items: 
+    - "{{ list }}" 

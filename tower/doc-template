@@ -1,0 +1,21 @@
+DOCUMENTATION = '''
+---
+module: module-name 
+short_description: This is a sentence describing the module 
+description: 
+   - Longer description of the module. 
+   - additional sentences. 
+version_added: "version-string" 
+author: "your name"
+options: 
+  option-1: 
+     description: 
+          - Description of the options goes here. 
+'''
+
+EXAMPLES = '''
+- name: descriptive string 
+  module-name:
+    argument1: value 
+    argument2: value 
+'''

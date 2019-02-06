@@ -1,0 +1,12 @@
+
+---
+- name : playbook5.yml
+  hosts: control_node 
+  gather_facts: yes
+  tasks:
+   - debug:
+       var: ansible_local 
+   - debug:
+       var: ansible_local.myfacts1.our_class.class_name
+   - debug:
+       msg: "{{ansible_local.myfacts1.our_class.instructor}}"

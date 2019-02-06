@@ -1,0 +1,12 @@
+---
+- name : playbook29.yml
+  hosts: control_node 
+  vars:
+    access: "granted"
+    var1: "{{lookup('template','httpd_conf_template.j2')}}"
+
+  tasks:
+  - name: save result of lookup 
+    copy: 
+      dest: /tmp/httpd_temp.conf
+      content: "{{ var1 }}\n"

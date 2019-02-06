@@ -1,0 +1,15 @@
+---
+- name : playbook21.yml
+  hosts: control_node 
+  become: true
+  tasks:
+  - name: install httpd 
+    yum: name=httpd state=latest 
+    tags: httpd_pkg_install
+
+  - name: change httpd.conf file
+    lineinfile:
+     path: /etc/httpd/conf/httpd.conf
+     regexp: '^#ServerName'
+     line: "ServerName {{ansible_nodename}}:80"
+    tags: httpd_conf_change

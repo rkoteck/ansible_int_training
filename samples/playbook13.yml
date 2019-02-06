@@ -1,0 +1,14 @@
+---
+- name : playbook13.yml
+  hosts: control_node 
+  become: true
+  tasks:
+  - name: install httpd 
+    yum:
+      name: httpd
+      state: latest 
+
+  - name: copy httpd.conf file
+    copy:
+      src: /ansible/samples/httpd.conf
+      dest: /etc/httpd/conf/httpd.conf

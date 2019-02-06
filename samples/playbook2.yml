@@ -1,0 +1,7 @@
+---
+- name : playbook2.yml
+  hosts: control_node
+  gather_facts: no 
+  tasks:
+  - debug:
+      var: ansible_distribution

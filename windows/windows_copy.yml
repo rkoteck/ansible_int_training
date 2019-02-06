@@ -1,0 +1,22 @@
+---
+- name : windows_copy.yml example of windows copy module usage
+  hosts: windows10 
+  gather_facts: no
+      
+  tasks:
+  - win_copy: 
+      src: ansible.cfg
+      dest: c:\ 
+    register: status
+    ignore_errors: True
+
+  - set_fact:
+      output: "copy was successful"
+    when: status.failed == false 
+
+  - set_fact:
+      output: "copy was not successful"
+    when: status.failed == true 
+
+  - debug:
+      var: output

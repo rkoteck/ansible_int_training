@@ -1,0 +1,5 @@
+[master-http-repo]
+name=remote httpd package repository
+baseurl=http://control_node/repository/
+gpgcheck=0
+enabled=1

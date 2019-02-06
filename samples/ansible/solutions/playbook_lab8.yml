@@ -1,0 +1,14 @@
+---
+
+- name: playbook_lab8.yml 
+  hosts: control_node 
+
+  tasks:
+  - name: second test of simple custom module
+    custom_module:
+      start: "different start value"
+      finish: "different final value"
+    register: result
+
+  - debug:
+      var: result

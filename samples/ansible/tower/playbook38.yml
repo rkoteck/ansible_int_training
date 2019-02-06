@@ -1,0 +1,15 @@
+---
+- name : playbook38.yml
+  hosts: control_node 
+  gather_facts: no
+  vars:
+    list: "{{ lookup('fileglob','playbook3?.yml') }}"
+
+  tasks:
+  - debug:
+      var: list
+  - copy: 
+      src: "{{ item }}"
+      dest: /tmp3
+    with_items:
+     - "{{ lookup('fileglob','playbook3?.yml').split(',') }}"

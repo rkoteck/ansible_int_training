@@ -1,0 +1,10 @@
+# ================== all entries  ===============
+---
+all:
+  hosts:
+    localhost:
+     ansible_connection: local
+    control_node:
+     ansible_connection: local
+    control_node.localdomain:
+# ================== all entries  ===============

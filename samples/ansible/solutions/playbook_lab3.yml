@@ -1,0 +1,16 @@
+---
+- name: playbook_lab3.yml
+  hosts: localhost 
+  tasks:
+    - name: set fact 1
+      set_fact: classes1="ansible_local.{{ansible_hostname}}.our_class.class_name"
+      register: one
+
+    - name: set fact 2
+      set_fact: "classes2=ansible_local.{{ansible_hostname}}.our_class.instructor"
+      register: two 
+
+    - debug: var="{{ item }}"
+      with_items: 
+      - "{{one.ansible_facts.classes1}}"
+      - "{{two.ansible_facts.classes2}}"

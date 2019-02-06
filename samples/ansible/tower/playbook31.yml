@@ -1,0 +1,11 @@
+---
+- name : playbook31.yml
+  hosts: managed_node,control_node 
+  gather_facts: no 
+  strategy: free 
+  tasks:
+  - name: first sleep
+    shell: sleep "{{ seconds }}"
+
+  - name: second sleep
+    shell: sleep "{{ seconds }}"

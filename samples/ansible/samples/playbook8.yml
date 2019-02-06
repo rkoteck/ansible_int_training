@@ -1,0 +1,18 @@
+---
+- name: playbook8.yml
+  hosts: control_node 
+  tasks:
+    - name: set fact 1
+      set_fact:
+       c1: "ansible_local.{{ansible_hostname}}.our_class.class_name"
+      register: one
+
+    - name: set fact 2
+      set_fact:
+       c2: "ansible_local.{{ansible_hostname}}.our_class.instructor"
+      register: two 
+
+    - debug: var="{{ item }}"
+      with_items: 
+      - "{{one.ansible_facts.c1}}"
+      - "{{two.ansible_facts.c2}}"

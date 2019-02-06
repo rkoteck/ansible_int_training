@@ -1,0 +1,4 @@
+- name: role3 
+  src: //home/user60/src/role1
+# src: //home/ansadm/src/role1
+  scm: git 

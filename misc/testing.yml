@@ -1,0 +1,13 @@
+---
+- name : testing.yml
+  hosts: control_node,managed_node,windows10
+  gather_facts: yes
+  tasks:
+
+  - name: ping module for Linux systems 
+    ping: 
+    when: ansible_os_family == "RedHat" 
+
+  - name: win_ping module for Windows systems 
+    win_ping: 
+    when: ansible_os_family == "Windows" 

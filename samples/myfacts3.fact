@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+#
+# myfacts3.fact
+x='{
+"our_class" : {"class_name": "Ansible-exec",
+ "instructor": "Phil LoVecchio-exec"
+              }
+}'
+echo "$x"

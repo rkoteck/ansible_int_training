@@ -1,0 +1,62 @@
+#!/bin/bash 
+#
+# dosols1 for Ansible (ad-hoc) lab exercise
+#
+command=$(grep "^${1}:" <<DATA
+1a:ansible -m cron -a 'name=uptime job="/usr/bin/uptime >> /tmp/uptime.data"' control_node
+1e:ansible -m cron  -a 'name=uptime state=absent' control_node
+2a:ansible -m shell -a 'yum list available dstat > /tmp/dstat.available' control_node
+2e:ansible -m file  -a 'path=/tmp/dstat.available state=absent' control_node
+3a1:ansible -m file -b -a 'path=/usr/sbin/lsof mode=4755' control_node
+3a2:ansible -m file -b -a 'path=/usr/sbin/lsof mode=u=rwsx,go=rx' control_node
+3e1:ansible -m file -b -a 'path=/usr/sbin/lsof mode=755' control_node
+3e2:ansible -m file -b -a 'path=/usr/sbin/lsof mode=u=rwx,go=rx' control_node
+4a:ansible -m file -b -a  'path=/cgibin  src=/var/www/cgi-bin  state=link' control_node
+5a:ansible -m copy -b -a 'dest=/cgibin src=/ansible/samples/cgi8.cgi' control_node
+6a1:ansible -m file -b -a 'path=/cgibin/cgi8.cgi state=absent' control_node
+6a2:ansible -m file -b -a 'path=/cgibin state=absent' control_node
+7a:ansible -m group -b -a 'name=admin gid=75000' control_node
+7e:ansible -m group -b -a 'name=admin state=absent' control_node
+8a:ansible -m lineinfile -b -a 'path=/etc/hosts line="192.168.91.156 pagent1.localdomain pagent1"' control_node
+8e:ansible -m lineinfile -b -a 'path=/etc/hosts line="192.168.91.156 pagent1.localdomain pagent1" state=absent' control_node
+9a:ansible -m at -a 'count=5 units=minutes command="mailx ansadm < .bashrc"' control_node
+9e1:ansible -m at -a 'count=5 units=minutes command="mailx ansadm < .bashrc"' control_node
+9e2:ansible -m at -a 'count=5 units=minutes command="mailx ansadm < .bashrc" state=absent' control_node
+10a:ansible -m package -b -a 'name=dstat state=latest use=yum' control_node
+10e:ansible -m package -b -a 'name=dstat state=absent use=yum' control_node
+11a:ansible -m yum -b -a 'name=dstat state=latest' control_node
+11e:ansible -m yum -b -a 'name=dstat state=absent' control_node
+12a:ansible -m systemd -b -a 'name=vsftpd enabled=yes state=started' control_node
+12e:ansible -m systemd -b -a 'name=vsftpd enabled=no state=stopped' control_node
+13a:ansible -m service -b -a 'name=vsftpd enabled=yes state=started' control_node
+13e1:ansible -m service -b -a 'name=vsftpd enabled=no  state=stopped' control_node
+13e2:ansible -m yum -b -a 'name=vsftpd state=absent' control_node
+14a:ansible -m user -b -a 'name=user61 uid=7000 home=/home/user61 shell=/bin/bash' control_node
+14e:ansible -m user -b -a 'name=user61 remove=yes state=absent' control_node
+15a:ansible -m filesystem -b -a 'dev=/dev/sda9 fstype=ext4' control_node
+16a:ansible -m mount -b -a 'path=/mnt_sda9  src=/dev/sda9 fstype=ext4 state=mounted'  control_node
+16e:ansible -m mount -b -a 'src=/dev/sda9 state=unmounted state=absent path=/mnt_sda9'  control_node
+17a:ansible -m wait_for -a 'path=/tmp/marker' control_node
+17e:ansible -m file -a 'path=/tmp/marker state=absent' -b control_node
+18a:ansible -m sysctl -b -a 'name=net.ipv4.icmp_echo_ignore_all value=1' control_node
+18e:ansible -m sysctl -b -a 'name=net.ipv4.icmp_echo_ignore_all value=0' control_node
+19a1:ansible -m file  -a 'path=/home/ansadm mode=0755'  control_node
+19a2:ansible -m acl -a 'path=/home/ansadm/.bashrc entry=u:user60:rw- state=present' control_node
+19e:ansible -m acl -a 'path=/home/ansadm/.bashrc entry=u:user60:rw- state=absent' control_node
+20a:ansible -m stat -a 'path=/home/ansadm/.bashrc'  control_node
+21a:ansible -m fetch -a 'src=/home/ansadm/.bashrc dest=/tmp/ flat=yes' control_node
+21e:ansible -m command -a 'rm /tmp/.bashrc'  control_node
+22a:ansible -m archive -a 'path=/ansible/samples dest=/tmp/ansible.tgz' control_node
+22e:ansible -m file -a 'path=/tmp/ansible.tgz  state=absent' control_node
+23a:ansible -m mail  -a 'to=user60 from=ansadm body="hello" subject="test"' control_node
+DATA
+)
+if [[ $2 == o ]]
+then
+command="$(echo ${command} | cut -d: -f2-) -o"
+else
+command=$(echo ${command} | cut -d: -f2-)
+fi
+echo -n -e "\n\nCommand: \033[1m${command} \033[0m    \n\nHit <Enter> to execute it:"
+read  xx
+eval $command

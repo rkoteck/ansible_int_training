@@ -1,0 +1,56 @@
+---
+- name : collector.yml 
+  hosts: control_node,managed_node
+  gather_facts: yes
+  vars:
+    controlnode: false
+  tasks:
+  - name: setup controlnode variable
+    stat: 
+       path: /usr/bin/ansible
+    register: status
+  - set_fact: 
+      controlnode: true 
+    when: status.stat.exists == true
+
+  - name: check for mounted file system 
+    command: df -h /var 
+    register: status
+    ignore_errors: True
+    no_log: yes
+
+  - name: set_fact module to create variable 
+    set_fact: 
+      output: "{{ansible_hostname}} - /var is mounted"
+    when: status.rc == 0 
+
+  - name: set_fact module to create variable 
+    set_fact: 
+      output: "{{ansible_hostname}} - /var is not mounted"
+    when: status.rc != 0 
+
+  - name: write timestamp to collector file
+    shell: echo $(date) >> /tmp/mounts.txt
+    when:  controlnode 
+
+  - name: create file on each node in the play
+    shell: echo {{output}} >> /tmp/mounts.txt
+
+  - name: get collector file from all managed nodes (only)
+    fetch:
+      src: /tmp/mounts.txt
+      dest: /tmp/temporary
+      flat: yes
+    when:  not controlnode 
+
+  - name: append managed nodes data to collector file
+    shell: cat /tmp/temporary >> /tmp/mounts.txt
+    when:  controlnode 
+
+  - name: remove file copied from the temporary
+    shell: rm -f /tmp/temporary 
+    when:  controlnode 
+
+  - name: remove all collector files (on managed nodes)
+    shell: rm -f /tmp/mounts.txt
+    when:  not controlnode 

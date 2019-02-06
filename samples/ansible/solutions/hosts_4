@@ -1,0 +1,9 @@
+# ============ actual entries ============================
+#
+[all]
+localhost  ansible_connection=local
+control_node  ansible_connection=local
+control_node.localdomain
+managed_node
+#
+# =======================================================

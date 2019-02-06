@@ -1,0 +1,5 @@
+[http-repo]
+name=remote package repository
+baseurl=http://localhost:8090/repository/
+gpgcheck=0
+enabled=1

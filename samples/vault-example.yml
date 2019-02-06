@@ -1,0 +1,43 @@
+---
+- name : vault-example.yml
+  hosts: control_node
+  gather_facts: no
+  become: true
+#
+# create encrypted value:
+# ansible-vault encrypt_string 'user' --name cleartext  #prompts for vault password(ansible)
+#
+# ansible-playbook --ask-vault playbook_lab11.yml
+#
+  vars:
+    cleartext: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62326235613963336236383231623732616136313635303965303962303533633265383536323435
+          6536663136336331656437393461303239353761373465390a393965323838393062323738363464
+          32383731373335363831353531383438363263386562633935336465363235303236633061336338
+          3632316634393232330a323966656330613631613334326432383530653837313431353630656333
+          6437
+
+  tasks:
+  - name: create user account
+    user:
+      name: "{{ item }}"
+      home: "/home/{{ item }}"
+      shell: /bin/bash
+    with_items:
+      - user62 
+      - user63 
+
+  - name: set password
+    shell:
+      /usr/bin/echo "{{cleartext}}" | /usr/bin/passwd {{ item }} --stdin
+    with_items:
+      - user62 
+      - user63 
+
+  - name: force password change
+    shell:
+      /usr/bin/passwd -e {{ item }}
+    with_items:
+      - user62 
+      - user63

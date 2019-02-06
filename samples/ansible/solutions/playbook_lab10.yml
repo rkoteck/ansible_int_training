@@ -1,0 +1,19 @@
+---
+- name : playbook_lab10.yml
+  hosts: managed_node 
+  gather_facts: no
+  become: true
+
+  tasks:
+  - name: copy repo descriptor file
+    copy:
+     src: /ansible/solutions/master_httpd.repo
+     dest: /etc/yum.repos.d
+
+  - name: clean local yum caches
+    command: 
+     /bin/yum clean all
+
+  - name: reset local yum caches
+    command: 
+     /bin/yum makecache

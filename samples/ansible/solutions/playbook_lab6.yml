@@ -1,0 +1,18 @@
+---
+- name : playbook_lab6.yml
+  hosts: control_node 
+  gather_facts: False
+  become: true
+  tasks:
+  - name: install httpd 
+    yum: name=httpd state=latest 
+    notify: httpd config change
+  
+  handlers:
+  - name: broadcast blast 
+    shell: wall "httpd package installed"
+    listen: httpd config change
+
+  - name: logger message 
+    shell: logger -p daemon.notice "httpd installed" 
+    listen: httpd config change

@@ -1,0 +1,91 @@
+#!/usr/bin/bash
+#
+# install_awx
+#
+# must be running as root:
+#
+if [[ $EUID != 0 ]]
+  then  echo "install_awx: must be running as root !";exit
+fi
+#
+echo "this procedure will locate files, build and install"
+echo "the Ansible AWX web UI"
+echo "you must have Internet access now (broadband or wireless"
+read -p "do you have Internet access [y/n]:" answer
+typeset -u answer=${answer:0:1}
+if [[ $answer != Y ]]
+then
+  echo "no Internet access, exiting...."
+  exit 1
+fi
+#
+echo "this procedure assumes a valid package repository" 
+echo "is setup and is available"
+echo "copying repo descriptor file into /etc/yum.repos.d"
+
+\cp /ansible/awx/awx_repos.repo  /etc/yum.repos.d
+echo "adding required package repository descriptors"
+yum clean all
+yum makecache
+#
+# install database server and other components
+#
+yum -y install postgresql96-server
+yum -y install erlang rabbitmq-server memcached nginx
+#
+# install awx
+#
+yum install -y python2-pynacl python2-bcrypt bubblewrap awx
+#
+# create database
+#
+/usr/pgsql-9.6/bin/postgresql96-setup initdb
+#
+# enable and start services
+#
+systemctl start rabbitmq-server
+systemctl enable rabbitmq-server
+systemctl start postgresql-9.6
+systemctl enable postgresql-9.6
+systemctl start memcached
+systemctl enable memcached
+#
+#
+sudo -u postgres createuser -s awx
+sudo -u postgres createdb -O awx awx
+#
+sudo -u awx /opt/awx/bin/awx-manage migrate
+#
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', 'ansible')" |
+sudo -u awx /opt/awx/bin/awx-manage shell
+sudo -u awx /opt/awx/bin/awx-manage create_preload_data
+sudo -u awx /opt/awx/bin/awx-manage provision_instance --hostname=control_node
+sudo -u awx /opt/awx/bin/awx-manage register_queue --queuename=tower --hostname=control_node
+#
+# web server for awx (and celery service definitions)
+#
+cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf_original
+cp /ansible/awx/nginx.conf /etc/nginx
+cp /ansible/awx/*.service  /usr/lib/systemd/system
+#
+# start (and enable) remaining services in order
+#
+systemctl start nginx
+systemctl start awx-cbreceiver
+systemctl start awx-celery-beat
+systemctl start awx-celery-worker
+systemctl start awx-channels-worker
+systemctl start awx-daphne
+systemctl start awx-web
+#
+systemctl enable nginx
+systemctl enable awx-cbreceiver
+systemctl enable awx-celery-beat
+systemctl enable awx-celery-worker
+systemctl enable awx-channels-worker
+systemctl enable awx-daphne
+systemctl enable awx-web
+#
+echo "at this point, awx should be installed and working"
+echo "now startup Firefox, enter:  http://localhost"
+echo "username: admin  password: ansible"
